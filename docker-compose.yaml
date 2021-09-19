@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    environment:
+     - API_KEY=<api token>
+     - APPLET_NAME=<applet name>
+    command: node app.js
+
+
+volumes:
+  node_modules:
